@@ -139,10 +139,15 @@ class BotManager:
                         if hasattr(old_agent, 'retire'):
                             old_agent.retire()
 
+                except Exception as e:
+                    self.logger.error("Reloading the agent failed:\n" + traceback.format_exc())
+
+                try:
                     # Call agent
                     self.call_agent(agent, self.agent_class_wrapper.get_loaded_class())
                 except Exception as e:
-                    self.logger.error("Reloading the agent failed:\n" + traceback.format_exc())
+                    self.logger.error("Agent threw exception:\n" + traceback.format_exc())
+
 
             # Ratelimit here
             #self.logger.debug('Latency of %s: %s', self.name, str(before - after))

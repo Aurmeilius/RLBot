@@ -172,6 +172,7 @@ task pipInstallRequirements(type: Exec) {
 
 // Establish some task dependencies so that some tasks always run before others.
 compileJava.dependsOn assembleProtos
+build.dependsOn pipInstallRequirements
 
 
 // This task creates a jar file which contains the java source files.
